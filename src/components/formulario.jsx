@@ -20,6 +20,11 @@ export const Formulario = ({ valoresIniciales, agregarData, esEditando, data }) 
             return
         }
 
+        if(cantidad <= 0 || precio <= 0) {
+            Swal.fire("Error, revise cantidad o precio", "Ingrese un valor válido.", "error");
+            return
+        }
+
         if (!esEditando) {
             const codigoExiste = data.some(
                 (item) => item.codigo.trim().toLowerCase() === codigo.trim().toLowerCase()
@@ -59,12 +64,12 @@ export const Formulario = ({ valoresIniciales, agregarData, esEditando, data }) 
 
             <div>
                 <label>Cantidad</label>
-                <input type="number" name="cantidad" value={cantidad} onChange={inputChange} />
+                <input type="number" name="cantidad" value={cantidad} onChange={inputChange} min="1" />
             </div>
 
             <div>
                 <label>Precio Unitario</label>
-                <input type="number" name="precio" value={precio} onChange={inputChange} />
+                <input type="number" name="precio" value={precio} onChange={inputChange} min="1" />
             </div>
 
             <button type="submit" className="primary-btn">
